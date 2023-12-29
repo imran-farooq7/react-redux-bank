@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deposite } from "../features/account/accountSlice";
 
 const AccountOperation = () => {
 	const [deposit, setDeposite] = useState("");
@@ -6,7 +8,10 @@ const AccountOperation = () => {
 	const [withdraw, setWithdraw] = useState("");
 	const [loanAmount, setLoanAmount] = useState("");
 	const [loanPurpose, setLoanPurpose] = useState("");
-	const handleDeposit = () => {};
+	const dispatch = useDispatch();
+	const handleDeposit = () => {
+		dispatch(deposite(deposit, currency));
+	};
 	const handleWithdraw = () => {};
 	const handleRequestLoan = () => {};
 	const handlePayLoan = () => {};
@@ -23,9 +28,9 @@ const AccountOperation = () => {
 					/>
 				</div>
 				<select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-					<option value="US Dollar">US Dollar</option>
-					<option value="Pound">Pound</option>
-					<option value="Euro">Euro</option>
+					<option value="USD">US Dollar</option>
+					<option value="GBP">Pound</option>
+					<option value="EUR">Euro</option>
 				</select>
 				<button onClick={handleDeposit}>Deposit</button>
 			</div>
