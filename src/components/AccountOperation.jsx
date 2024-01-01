@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deposite } from "../features/account/accountSlice";
+import {
+	deposit,
+	payloan,
+	requestLoan,
+	withdraw,
+} from "../features/account/accountSlice";
 
 const AccountOperation = () => {
-	const [deposit, setDeposite] = useState("");
+	const [deposite, setDeposite] = useState("");
 	const [currency, setCurrency] = useState("USD");
-	const [withdraw, setWithdraw] = useState("");
+	const [withdrawe, setWithdrawe] = useState("");
 	const [loanAmount, setLoanAmount] = useState("");
 	const [loanPurpose, setLoanPurpose] = useState("");
 	const dispatch = useDispatch();
 	const handleDeposit = () => {
-		dispatch(deposite(deposit, currency));
+		dispatch(deposit(Number(deposite)));
 	};
-	const handleWithdraw = () => {};
-	const handleRequestLoan = () => {};
-	const handlePayLoan = () => {};
+	const handleWithdraw = () => {
+		dispatch(withdraw(withdrawe));
+	};
+	const handleRequestLoan = () => {
+		dispatch(requestLoan(Number(loanAmount), loanPurpose));
+	};
+	const handlePayLoan = () => {
+		dispatch(payloan());
+	};
 	return (
 		<div className="inputs">
 			<div>
@@ -23,7 +34,7 @@ const AccountOperation = () => {
 					<input
 						type="number"
 						id="deposit"
-						value={deposit}
+						value={deposite}
 						onChange={(e) => setDeposite(e.target.value)}
 					/>
 				</div>
@@ -39,8 +50,8 @@ const AccountOperation = () => {
 				<input
 					type="text"
 					id="id"
-					value={withdraw}
-					onChange={(e) => setWithdraw(e.target.value)}
+					value={withdrawe}
+					onChange={(e) => setWithdrawe(e.target.value)}
 				/>
 				<button onClick={handleWithdraw}>Withdraw</button>
 			</div>
